@@ -8,15 +8,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static com.example.serverapp.Main.controller;
+
 public class ServerConnection {
     static DataOutputStream dataOutputStream;
     static DataInputStream dataInputStream;
-    static MainController controller;
-
-    static {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("main.fxml"));
-        controller = loader.getController();
-    }
 
     public static void launch() {
         try {
@@ -31,8 +27,7 @@ public class ServerConnection {
                 while (true) {
                     try {
                         String message = dataInputStream.readUTF();
-//                        controller.updateLog(message);
-                        System.out.printf("client: %s%n", message);
+                        controller.updateLog(message);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
